@@ -24,6 +24,7 @@ class agent_citizen():
     
     def buy_good(self, good_name, quantity):
         lowest_price_sell_order = markets.markets[good_name].get_lowest_price_sell_order()
+        print(lowest_price_sell_order)
         markets.markets[good_name].exercise_buy_order(lowest_price_sell_order, self, quantity)
     
     # Return name of highest marginal value good (Greatest instantaneous slope)
@@ -31,7 +32,17 @@ class agent_citizen():
         marginal_values = {}
         for key, value in goods.good_marginal_value_functions.items():
             marginal_values[key] = value.get_marginal_value(self.consumed_goods_quantities[key])
-        print(marginal_values)
         return max(marginal_values, key=marginal_values.get) # Copilot!
     
+
+class agent_firm():
+    def __init__(self, capital):
+        self.capital = capital
+        self.allocated_goods = {}
+        self.consumed_goods_quantities = {}
+        
+        for key in goods.goods_consumed:
+            self.consumed_goods_quantities[key] = 0
             
+    def append_sell_order(self, good_name, quantity, price):
+        markets.markets[good_name].append_sell_order(self, quantity, price)

@@ -16,9 +16,12 @@ class market():
     
     def exercise_buy_order(self, agent_producer, agent_consumer, quantity):
         quantity = min(quantity, self.sell_orders[agent_producer].quantity) # Don't allow negative quantities
-        self.sell_orders[agent_producer][0] -= quantity
-        agent_producer.capital += self.sell_orders[agent_producer][1] * quantity
+        quantity = min(quantity, agent_consumer.capital // self.sell_orders[agent_producer].price) # Don't allow buying more than you can afford, double slash (//) does floor division
+        
+        self.sell_orders[agent_producer].quantity -= quantity
+        agent_producer.capital += self.sell_orders[agent_producer].price * quantity
         agent_consumer.consumed_goods_quantities[self.good_name] += quantity
+        agent_consumer.capital -= self.sell_orders[agent_producer].price * quantity
 
  
 class sell_order():

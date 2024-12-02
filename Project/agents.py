@@ -5,7 +5,7 @@ import markets
 class agent_citizen():
     def __init__(self, capital):
         self.capital = capital
-        self.allocated_goods = {}
+        self.allocated_goods = []
         self.consumed_goods_quantities = {}
         
         for key in goods.goods_consumed:
@@ -19,13 +19,11 @@ class agent_citizen():
     # Run every tick
     def buy_highest_marginal_value_good(self):
         good_name = self.get_highest_marginal_value_purchase()
-        print(good_name)
         self.buy_good(good_name, 1)
     
     def buy_good(self, good_name, quantity):
         lowest_price_sell_order = markets.markets[good_name].get_lowest_price_sell_order()
-        print(lowest_price_sell_order)
-        markets.markets[good_name].exercise_buy_order(lowest_price_sell_order, self, quantity)
+        markets.markets[good_name].exercise_buy_order_consumed(lowest_price_sell_order, self, quantity) # Copilot wrote self there
     
     # Return name of highest marginal value good (Greatest instantaneous slope)
     def get_highest_marginal_value_purchase(self):
@@ -38,11 +36,18 @@ class agent_citizen():
 class agent_firm():
     def __init__(self, capital):
         self.capital = capital
-        self.allocated_goods = {}
+        self.allocated_goods = []
         self.consumed_goods_quantities = {}
         
         for key in goods.goods_consumed:
             self.consumed_goods_quantities[key] = 0
             
+    # Create new or add to existing sell order for either a consumed or allocated good
     def append_sell_order(self, good_name, quantity, price):
         markets.markets[good_name].append_sell_order(self, quantity, price)
+    
+    def control_sell_order_price():
+        pass
+    
+    def control_good_production_quantity():
+        pass

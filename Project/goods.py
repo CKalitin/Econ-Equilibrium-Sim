@@ -8,10 +8,11 @@ class good_consumed():
 # Allocated goods are exchanged by reference, eg. if you buy a house, you get a house object
 # Jobs use allocated goods, hence the owner agent and consumer agent variables, these are references to the owner and agent that are useful when buying and selling
 class good_allocated():
-    def __init__(self, price):
-        self.owner_agent = None
-        self.consumer_agent = None
+    def __init__(self, name, price, agent_producer, agent_consumer):
+        self.name = name
         self.price = price
+        self.agent_producer = agent_producer
+        self.agent_consumer = agent_consumer
 
 
 class good_consumed_marginal_value_function():
@@ -26,6 +27,9 @@ class good_consumed_marginal_value_function():
 goods_consumed = {}
 goods_consumed["food"] = good_consumed(5)
 goods_consumed["house"] = good_consumed(0.2)
+
+goods_allocated = {}
+goods_allocated["job"] = good_allocated("job", 1, None, None) # For job allocated goods, price is salary per tick
 
 good_marginal_value_functions = {}
 good_marginal_value_functions["food"] = good_consumed_marginal_value_function([0, -0.5, 2])

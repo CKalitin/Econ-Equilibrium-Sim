@@ -1,6 +1,4 @@
 import agents
-import goods
-import markets
 
 class simulation():
     def __init__(self):

@@ -1,3 +1,8 @@
+## 2024 Dec 2
+I wrote a lot of code yesterday starting to implement what I wrote about the day before.
+
+Getting the Consumer Marginal Value function working right from a theoretical persepctive is something I didn't fully think through. It has to be what maximizes consumer surplus, so price has to be subtracted from it. This is obvious once you consider production costs in the limit, eg. a $1000 loaf of bread. This also implies that in the limit, consumers must pay $1000 for a loaf of bread.
+
 
 ## 2024 Nov 30
 I need to plan way more and actually do this the way it's taught in economics.
